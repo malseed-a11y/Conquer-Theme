@@ -8,9 +8,8 @@ if (function_exists('vc_map')) {
         'name'            => 'Table Of Contents',
         'base'            => 'table_of_contents',
         'category'        => 'My Widgets',
-        'icon'            => 'icon-wpbakery-table',
         'description'     => 'Table Of Contents with multiple rows and columns',
-        'as_parent'       => ['only' => 'table_of_contents_child'],
+        'as_parent'       => ['only' => 'table_of_contents_row'],
         'content_element' => true,
         'js_view'         => 'VcColumnView',
         'params'          => [
@@ -21,24 +20,28 @@ if (function_exists('vc_map')) {
                 'value'       => '',
                 'group'       => 'General',
             ],
-            [
-                'type'        => 'textfield',
-                'heading'     => 'Number of Columns',
-                'param_name'  => 'col_number',
-                'value'       => '3',
-                'group'       => 'General',
-            ],
+
         ]
     ]);
 
-
+    //Row
+    vc_map([
+        'name'            => 'Table Of Contents Row',
+        'base'            => 'table_of_contents_row',
+        'category'        => 'My Widgets',
+        'description'     => 'Single Table Row',
+        'as_child'        => ['only' => 'table_of_contents'],
+        'as_parent'        => ['only' => 'table_of_contents_cell'],
+        'content_element' => true,
+        'js_view'         => 'VcColumnView',
+        'params'          => []
+    ]);
+    //Cell
     vc_map([
         'name'            => 'Table Of Contents Cell',
-        'base'            => 'table_of_contents_child',
+        'base'            => 'table_of_contents_cell',
         'category'        => 'My Widgets',
-        'icon'            => 'icon-wpbakery-table',
-        'description'     => 'Single Table Cell',
-        'as_child'        => ['only' => 'table_of_contents'],
+        'as_child'        => ['only' => 'table_of_contents_row'],
         'content_element' => true,
         'params'          => [
             [
@@ -46,6 +49,7 @@ if (function_exists('vc_map')) {
                 'heading'     => 'Cell Content',
                 'param_name'  => 'cell',
                 'value'       => '',
+                'admin_label'    => true,
                 'group'       => 'General',
             ]
         ]
@@ -54,7 +58,8 @@ if (function_exists('vc_map')) {
 
 if (class_exists('WPBakeryShortCodesContainer')) {
     class WPBakeryShortCode_table_of_contents extends WPBakeryShortCodesContainer {}
+    class WPBakeryShortCode_table_of_contents_row extends WPBakeryShortCodesContainer {}
 }
 if (class_exists('WPBakeryShortCode')) {
-    class WPBakeryShortCode_table_of_contents_child extends WPBakeryShortCode {}
+    class WPBakeryShortCode_table_of_contents_cell extends WPBakeryShortCode {}
 }

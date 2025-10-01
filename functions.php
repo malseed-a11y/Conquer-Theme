@@ -154,6 +154,20 @@ function conquer_scripts()
 }
 add_action('wp_enqueue_scripts', 'conquer_scripts');
 
+
+
+
+
+//===========================
+//Trips CPT
+require get_template_directory() . '/inc/trips_cpt.php';
+
+
+
+//===========================
+
+
+
 /**
  * Implement the Custom Header feature.
  */
@@ -185,16 +199,14 @@ if (is_plugin_active('elementor/elementor.php')) {
 	require_once get_template_directory() . '/inc/elementor-registration.php';
 }
 
+
+
+
+
 //===========================
 //WPBAKERY 
 if (is_plugin_active('js_composer/js_composer.php')) {
 	require_once get_template_directory() . '/inc/wpbakery-widgets/shortcods.php';
 	require_once get_template_directory() . '/inc/wpbakery-widgets/vcmaps.php';
 }
-//===========================
-
-
-//===========================
-//Trips CPT
-require get_template_directory() . '/inc/trips_cpt.php';
 //===========================

@@ -1064,44 +1064,41 @@ textarea {
 /*==================================*/
 /*--- custom trip shortcode --- */
 .trip_posts_container {
-  border: 2px solid #4169e1;
+  border: 2px solid #c0d4ff;
   width: 90%;
-  margin: 0 auto;
-  padding: 15px;
-  margin-bottom: 20px;
+  margin: 10px auto;
+  padding: 20px;
   border-radius: 10px;
-
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
 }
 
 .trip_posts_container h2 {
   text-align: center;
   font-size: 24px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  width: 100%;
 }
 
 .single_trip_post {
-  background-color: #800080;
+  background-color: #ffffff;
   padding: 20px;
-  margin: 10px auto;
-  width: 90%;
-  border-radius: 5px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  font-family: "Tajawal", Arial, sans-serif;
-  font-size: 16px;
-  line-height: 1.5;
-  margin-bottom: 10px;
-
-  text-align: center;
+  width: calc(50% - 10px);
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  text-align: right;
+  direction: rtl;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 200px;
 }
 
 .trip_post_tags {
   text-align: left;
-  direction: ltr;
-  background-color: #191970;
-
+  background-color: #e0e7ff;
   padding: 10px;
   border-radius: 5px;
 }
@@ -1112,8 +1109,15 @@ textarea {
   margin-bottom: 8px;
 }
 
-.custom_trip_shortcode li {
+.trip_post_tags li {
   margin-bottom: 5px;
+  list-style: none;
+}
+
+@media (max-width: 768px) {
+  .single_trip_post {
+    width: 100%;
+  }
 }
 
 /*==================================*/
@@ -1128,6 +1132,7 @@ textarea {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   border: #000000 solid 1px;
 }
+
 .toc-header {
   text-align: center;
   font-size: 1.8em;
@@ -1137,6 +1142,7 @@ textarea {
   border-bottom: 2px solid #e0e0e0;
   font-weight: 600;
 }
+
 .toc-table {
   /* border-collapse: separate; */
   border-spacing: 0 5px;

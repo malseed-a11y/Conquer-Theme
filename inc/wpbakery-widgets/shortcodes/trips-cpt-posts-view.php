@@ -6,9 +6,9 @@ function custom_list_category($atts)
 
     $atts  = shortcode_atts([
         'category'      => '',
-        'color'         => '#BB005F',
+        'bg_color'         => '#1E73BE',
         'title_color'    => '#ffffff',
-        'content_color' => '#ffffff',
+        'content_color' => '#1E73BE',
         'posts_number'  => '5',
     ], $atts);
 
@@ -36,7 +36,7 @@ function custom_list_category($atts)
     $term = get_term($category_id, 'trip_category');
     $category_heading = $term && !is_wp_error($term) ? $term->name : '';
 
-    $out  = '<div class="trip_posts_container" style="background-color:' . esc_attr($atts['color']) . '">';
+    $out  = '<div class="trip_posts_container" style="background-color:' . esc_attr($atts['bg_color']) . '">';
     $out .= '<h2 style="color:' . esc_attr($atts['title_color']) . '">' . esc_html($category_heading) . '</h2>';
 
     if ($query->have_posts()) {
@@ -44,8 +44,8 @@ function custom_list_category($atts)
             $query->the_post();
 
             $out .= '<div class="single_trip_post">';
-            $out .= '<h3 style="color:' . esc_attr($atts['content_color']) . '">' . esc_html(get_the_title()) . '</h3>';
-            $out .= '<div style="color:' . esc_attr($atts['content_color']) . '" class="trip_post_content">' . apply_filters('the_content', get_the_content()) . '</div>';
+            $out .= '<div><h3 style="color:' . esc_attr($atts['content_color']) . '">' . esc_html(get_the_title()) . '</h3>';
+            $out .= '<div style="color:' . esc_attr($atts['content_color']) . '" class="trip_post_content">' . apply_filters('the_content', get_the_content()) . '</div></div>';
 
             $tags = wp_get_post_terms(get_the_ID(), 'trip_tag', ['fields' => 'names']);
             if (!empty($tags)) {
