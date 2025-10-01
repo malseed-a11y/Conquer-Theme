@@ -988,7 +988,6 @@ textarea {
   padding: 5px 10%;
   border-radius: 10px;
   overflow: hidden;
-  transition: 0.5s;
 }
 
 .styledProductImage > img {
@@ -1061,3 +1060,100 @@ textarea {
     text-align: center;
   }
 }
+
+/*==================================*/
+/*--- custom trip shortcode --- */
+.trip_posts_container {
+  border: 2px solid #4169e1;
+  width: 90%;
+  margin: 0 auto;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.trip_posts_container h2 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.single_trip_post {
+  background-color: #800080;
+  padding: 20px;
+  margin: 10px auto;
+  width: 90%;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  font-family: "Tajawal", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 10px;
+
+  text-align: center;
+}
+
+.trip_post_tags {
+  text-align: left;
+  direction: ltr;
+  background-color: #191970;
+
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.single_trip_post h3,
+.trip_post_tags h3 {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.custom_trip_shortcode li {
+  margin-bottom: 5px;
+}
+
+/*==================================*/
+/*--- Table of contents --- */
+.toc-wrapper {
+  border: none;
+  padding: 5px;
+  width: 70%;
+  margin: 10px auto;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: #000000 solid 1px;
+}
+.toc-header {
+  text-align: center;
+  font-size: 1.8em;
+  margin-bottom: 15px;
+  color: #1a1a1a;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #e0e0e0;
+  font-weight: 600;
+}
+.toc-table {
+  /* border-collapse: separate; */
+  border-spacing: 0 5px;
+}
+.toc-row:nth-child(even) {
+  background-color: #f7f7f7;
+}
+
+.toc-cell {
+  padding: 14px 10px;
+  border: none;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 4px;
+}
+.toc-row:nth-child(odd) .toc-cell {
+  background-color: #ffffff;
+}
+
+/*==================================*/

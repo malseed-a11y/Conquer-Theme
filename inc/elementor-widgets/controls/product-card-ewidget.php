@@ -18,7 +18,7 @@ class Elementor_Nav_Product_Widget extends Widget_Base
     {
         return 'eicon-product-meta';
     }
-    //test
+
 
     public function get_categories()
     {

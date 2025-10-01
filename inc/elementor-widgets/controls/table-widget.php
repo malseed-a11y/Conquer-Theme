@@ -30,7 +30,7 @@ class Elementor_Tabel_Widget  extends Widget_Base
     }
     public function get_categories()
     {
-        return ['basic'];
+        return ['Ewidget'];
     }
 
 

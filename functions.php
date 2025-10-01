@@ -184,6 +184,17 @@ if (defined('JETPACK__VERSION')) {
 if (is_plugin_active('elementor/elementor.php')) {
 	require_once get_template_directory() . '/inc/elementor-registration.php';
 }
+
+//===========================
+//WPBAKERY 
 if (is_plugin_active('js_composer/js_composer.php')) {
-	require_once get_template_directory() . '/inc/WPBakery-custom-Widget.php';
+	require_once get_template_directory() . '/inc/wpbakery-widgets/shortcods.php';
+	require_once get_template_directory() . '/inc/wpbakery-widgets/vcmaps.php';
 }
+//===========================
+
+
+//===========================
+//Trips CPT
+require get_template_directory() . '/inc/trips_cpt.php';
+//===========================
