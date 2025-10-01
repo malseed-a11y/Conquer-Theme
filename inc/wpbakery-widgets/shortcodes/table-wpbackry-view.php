@@ -6,13 +6,6 @@ function table_of_contents_shortcode($atts, $content = null)
         'header_text' => '',
 
     ], $atts);
-    //
-
-    $output = '<div class="toc-wrapper">';
-
-    if ($atts['header_text']) {
-        $output .= '<h3 class="toc-header">' . esc_html($atts['header_text']) . '</h3>';
-    }
 
 
     $rows_content = do_shortcode($content);
