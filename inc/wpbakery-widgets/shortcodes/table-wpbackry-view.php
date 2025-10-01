@@ -9,17 +9,14 @@ function table_of_contents_shortcode($atts, $content = null)
 
     $col_number = intval($atts['col_number']);
 
-    // Extract child shortcodes
-    preg_match_all('/\[table_of_contents_child[^\]]*\]/', $content, $matches);
-    $cells_html = [];
-    if (!empty($matches[0])) {
-        foreach ($matches[0] as $child_shortcode) {
-            $cells_html[] = do_shortcode($child_shortcode);
-        }
-    }
+
+    $cells_content = do_shortcode($content);
 
 
-    $output = '<div class="toc-wrapper ">';
+    preg_match_all('/<td.*?<\/td>/', $cells_content, $matches);
+    $cells = $matches[0];
+
+    $output = '<div class="toc-wrapper">';
 
     if ($atts['header_text']) {
         $output .= '<h3 class="toc-header">' . esc_html($atts['header_text']) . '</h3>';
@@ -28,13 +25,13 @@ function table_of_contents_shortcode($atts, $content = null)
     $output .= '<table class="toc-table"><tbody>';
 
     $count = 0;
-    $cells_number = count($cells_html);
+    $cells_number = count($cells);
     if ($cells_number > 0) {
         while ($count < $cells_number) {
             $output .= '<tr class="toc-row">';
             for ($j = 0; $j < $col_number; $j++) {
                 if ($count < $cells_number) {
-                    $output .= $cells_html[$count];
+                    $output .= $cells[$count];
                     $count++;
                 }
             }
