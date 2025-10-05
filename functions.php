@@ -148,9 +148,29 @@ function conquer_scripts()
 
 	wp_enqueue_script('conquer-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true);
 
-	if (is_singular() && comments_open() && get_option('thread_comments')) {
-		wp_enqueue_script('comment-reply');
-	}
+	//===========================
+	wp_enqueue_script(
+		'wpajax',
+		get_template_directory_uri() . '/js/wpajax.js',
+		array(),
+		'1.0.0',
+		true
+	);
+
+
+	wp_localize_script(
+		'wpajax',
+		'my_ajax_obj',
+		array(
+			'ajax_url' => admin_url('admin-ajax.php'),
+			'nonce'    => wp_create_nonce('msb_ajax_nonce'),
+		)
+	);
+	//===========================
+
+	// if (is_singular() && comments_open() && get_option('thread_comments')) {
+	// 	wp_enqueue_script('comment-reply');
+	// }
 }
 add_action('wp_enqueue_scripts', 'conquer_scripts');
 
@@ -161,12 +181,60 @@ add_action('wp_enqueue_scripts', 'conquer_scripts');
 //===========================
 //Trips CPT
 require get_template_directory() . '/inc/trips_cpt.php';
-
-
-
 //===========================
 
 
+//===========================
+//AJAX form handling
+add_action('wp_ajax_send_comment_form', 'handle_send_comment_form');
+add_action('wp_ajax_nopriv_send_comment_form', 'handle_send_comment_form');
+
+function handle_send_comment_form()
+{
+	check_ajax_referer('msb_ajax_nonce', '_ajax_nonce');
+
+	$table_name = sanitize_text_field($_POST['table_name'] ?? '');
+	$username = sanitize_text_field($_POST['username'] ?? '');
+	$email = sanitize_email($_POST['email'] ?? '');
+	$message = sanitize_textarea_field($_POST['message'] ?? '');
+
+	if (empty($table_name)) {
+		wp_send_json_error('Missing required data.');
+		wp_die();
+	}
+
+
+
+
+	$commentdata = [
+		'comment_author'       => $username,
+		'comment_author_email' => $email,
+		'comment_content'      => $message,
+		// 'comment_approved'       => 0,
+	];
+
+	$comment_id = wp_insert_comment($commentdata);
+
+	if (!$comment_id || is_wp_error($comment_id)) {
+		wp_send_json_error('Failed to save comment.');
+		wp_die();
+	}
+
+
+	add_comment_meta($comment_id, 'table_name', sanitize_title($table_name));
+
+
+	$new_row_data = [$username, $email, $message];
+	$row_html = '<tr>';
+	foreach ($new_row_data as $value) {
+		$row_html .= '<td>' . esc_html($value) . '</td>';
+	}
+	$row_html .= '</tr>';
+
+	wp_send_json_success(['row_html' => $row_html]);
+}
+
+//===========================
 
 /**
  * Implement the Custom Header feature.
